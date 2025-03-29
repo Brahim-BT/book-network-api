@@ -1,13 +1,9 @@
 package com.brahim.book_network_api.model;
 
-import java.util.List;
-
 import com.brahim.book_network_api.common.BaseEntity;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,13 +16,11 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Role extends BaseEntity {
+public class Feedback extends BaseEntity {
 
-    @Column(unique = true)
-    private String name;
+    private Double rating;
+    private String comment;
 
-    @ManyToMany(mappedBy = "roles")
-    @JsonIgnore
-    private List<User> users;
-
+    @ManyToOne
+    private Book book;
 }
