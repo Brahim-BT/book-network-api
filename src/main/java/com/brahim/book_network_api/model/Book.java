@@ -1,5 +1,6 @@
 package com.brahim.book_network_api.model;
 
+import java.beans.Transient;
 import java.util.List;
 
 import com.brahim.book_network_api.common.BaseEntity;
@@ -30,11 +31,21 @@ public class Book extends BaseEntity {
     private boolean shareable;
 
     @ManyToOne
-    private User user;
+    private User owner;
 
     @OneToMany(mappedBy = "book")
     private List<Feedback> feedbacks;
 
     @OneToMany(mappedBy = "book")
     private List<BookTransactionHistory> bookTransactionHistories;
+
+    @Transient
+    public Double getRating() {
+        if (feedbacks == null || feedbacks.isEmpty()) {
+            return 0.0;
+        }
+        var rating = feedbacks.stream().mapToDouble(Feedback::getRating).average().orElse(0.0);
+        Double roundedRating = Math.round(rating * 10.0) / 10.0;
+        return roundedRating;
+    }
 }
