@@ -7,6 +7,7 @@ import com.brahim.book_network_api.dto.BookResponse;
 import com.brahim.book_network_api.dto.BorrowedBookResponse;
 import com.brahim.book_network_api.model.Book;
 import com.brahim.book_network_api.model.BookTransactionHistory;
+import com.brahim.book_network_api.utils.FileUtils;
 
 @Service
 public class BookMapper {
@@ -34,8 +35,7 @@ public class BookMapper {
                 .archived(book.isArchived())
                 .shareable(book.isShareable())
                 .ownerName(book.getOwner().getFullName())
-                // TODO implement cover later
-                // .cover()
+                .cover(FileUtils.readFileFromLocation(book.getBookCover()))
                 .build();
     }
 
