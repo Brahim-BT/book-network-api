@@ -11,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.brahim.book_network_api.Mapper.BookMapper;
 import com.brahim.book_network_api.common.PageResponse;
 import com.brahim.book_network_api.dto.BookRequest;
 import com.brahim.book_network_api.dto.BookResponse;

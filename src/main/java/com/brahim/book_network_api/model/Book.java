@@ -44,7 +44,7 @@ public class Book extends BaseEntity {
         if (feedbacks == null || feedbacks.isEmpty()) {
             return 0.0;
         }
-        var rating = feedbacks.stream().mapToDouble(Feedback::getRating).average().orElse(0.0);
+        var rating = feedbacks.stream().mapToDouble(Feedback::getNote).average().orElse(0.0);
         Double roundedRating = Math.round(rating * 10.0) / 10.0;
         return roundedRating;
     }
