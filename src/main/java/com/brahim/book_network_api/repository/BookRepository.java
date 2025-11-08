@@ -12,6 +12,6 @@ import com.brahim.book_network_api.model.Book;
 @Repository
 public interface BookRepository extends JpaRepository<Book, Long>,JpaSpecificationExecutor<Book> {
 
-    @Query("SELECT b FROM Book b WHERE b.archived = false AND b.shareable = true AND b.user.id != :userId")
+    @Query("SELECT b FROM Book b WHERE b.archived = false AND b.shareable = true AND b.owner.id != :userId")
     Page<Book> findAllDisplayableBooks(Pageable pageable, Long userId);
 }
