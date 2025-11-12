@@ -11,6 +11,7 @@ public enum BusinessErrorCode {
     ACCOUNT_LOCKED(302, "User account is locked", HttpStatus.FORBIDDEN),
     ACCOUNT_DISABLED(303, "User account is disabled", HttpStatus.FORBIDDEN),
     BAD_CREDENTIALS(304, "Login and / or password is incorrect", HttpStatus.UNAUTHORIZED),
+    DUPLICATE_EMAIL(305, "Email already exists", HttpStatus.CONFLICT),
     ;
 
     @Getter

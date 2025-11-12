@@ -15,6 +15,7 @@ import com.brahim.book_network_api.controller.AuthenticationRequest;
 import com.brahim.book_network_api.controller.AuthenticationResponse;
 import com.brahim.book_network_api.controller.RegistrationRequest;
 import com.brahim.book_network_api.enums.EmailTemplateName;
+import com.brahim.book_network_api.exception.EmailAlreadyExistsException;
 import com.brahim.book_network_api.model.Token;
 import com.brahim.book_network_api.model.User;
 import com.brahim.book_network_api.repository.RoleRepository;
@@ -40,6 +41,11 @@ public class AuthenticationService {
     private String activationUrl;
 
     public void register(RegistrationRequest request) throws MessagingException {
+        // Check if email already exists
+        if (userRepository.existsByEmail(request.getEmail())) {
+            throw new EmailAlreadyExistsException("Email " + request.getEmail() + " already exists");
+        }
+        
         var userRole = roleRepository.findByName("USER")
                 .orElseThrow(() -> new IllegalStateException("User role not found."));
         var user = User.builder()
