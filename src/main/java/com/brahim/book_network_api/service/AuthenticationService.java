@@ -82,7 +82,7 @@ public class AuthenticationService {
     }
 
     private String generateActivationToken(int length) {
-        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        String characters = "0123456789";
         StringBuilder token = new StringBuilder();
         SecureRandom secureRandom = new SecureRandom();
         for (int i = 0; i < length; i++) {

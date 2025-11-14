@@ -4,6 +4,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
@@ -20,6 +21,9 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class EmailService {
+
+    @Value("${spring.mail.username}")
+    private String fromEmail;
 
     private final JavaMailSender javaMailSender;
     private final SpringTemplateEngine templateEngine;
@@ -42,7 +46,7 @@ public class EmailService {
         properties.put("activationToken", activationToken);
         Context context = new Context();
         context.setVariables(properties);
-        mimeMessageHelper.setFrom("baybat7@gmail.com");
+        mimeMessageHelper.setFrom(fromEmail);
         mimeMessageHelper.setTo(to);
         mimeMessageHelper.setSubject(subject);
         mimeMessageHelper.setText(templateEngine.process(templateName, context), true);
