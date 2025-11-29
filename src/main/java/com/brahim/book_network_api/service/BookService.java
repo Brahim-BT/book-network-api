@@ -40,6 +40,16 @@ public class BookService {
                 User user = (User) connectedUser.getPrincipal();
                 Book book = bookMapper.toBook(request);
                 book.setOwner(user);
+
+                // If updating an existing book, preserve the cover
+                if (request.id() != null) {
+                        Book existingBook = bookRepository.findById(request.id()).orElseThrow(
+                                        () -> new EntityNotFoundException("No book found with id " + request.id()));
+                        if (existingBook != null) {
+                                book.setBookCover(existingBook.getBookCover());
+                        }
+                }
+
                 return bookRepository.save(book).getId();
         }
 

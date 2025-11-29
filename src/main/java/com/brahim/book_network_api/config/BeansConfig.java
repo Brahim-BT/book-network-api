@@ -44,7 +44,7 @@ public class BeansConfig {
     }
 
     @Bean
-    CorsFilter corsFilter(AuthenticationConfiguration configuration) throws Exception {
+    CorsFilter corsFilter() throws Exception {
         final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         final CorsConfiguration corsConfiguration = new CorsConfiguration();
         corsConfiguration.setAllowCredentials(true);
